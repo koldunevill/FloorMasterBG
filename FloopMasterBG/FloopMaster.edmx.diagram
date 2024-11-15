@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3628e5b5bad5464bb581c0673a499bf9" Name="Diagram1">
+        <EntityTypeShape EntityType="FloopMasterModel.ApplicationProductParthers" Width="1.5" PointX="3" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.ManyArticle" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.Material" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.Material_Product" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.MaterialProviderHistory" Width="1.5" PointX="8.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.Pathers" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.Product" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.Provider" Width="1.5" PointX="6" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.Role" Width="1.5" PointX="1.5" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.SalePlace" Width="1.5" PointX="0.75" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.SalePlacePathers" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.TypeMaterial" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.TypePathers" Width="1.5" PointX="1.5" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.TypeProduct" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.TypeProvider" Width="1.5" PointX="3.75" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.Workers" Width="1.5" PointX="0.75" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.CostPriceHistory" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.MaterialHistory" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.MinCostHistory" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FloopMasterModel.ProductHistory" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
+        <AssociationConnector Association="FloopMasterModel.FK_ApplicationProductParthers_Workers" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_ManyArticle_ApplicationProductParthers" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_ProductParthers_Parthers" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_ManyArticle_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_Material_Product_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_Material_TypeMaterial" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_MaterialHistory_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_MaterialProviderHistory_Material" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_Material_Product_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_MaterialProviderHistory_Provider" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_MaterialProviderHistory_Workers" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_Parthers_TypePathers" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_SalePlacePathers_Pathers" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_CostPriceHistory_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_MinCostHistory_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_Product_TypeProduct1" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_ProductHistory_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_Provider_TypeProvider" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_Workers_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="FloopMasterModel.FK_SalePlacePathers_SalePlace" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

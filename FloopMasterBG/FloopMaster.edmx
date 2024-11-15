@@ -1,0 +1,1512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище FloopMasterModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ApplicationProductParthers">
+          <Key>
+            <PropertyRef Name="IDApplication" />
+          </Key>
+          <Property Name="IDApplication" Type="int" Nullable="false" />
+          <Property Name="IDParthers" Type="int" Nullable="false" />
+          <Property Name="IDWorkers" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "FloopMaster.dbo.CostPriceHistory" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="CostPriceHistory">
+          <Key>
+            <PropertyRef Name="ArticleProduct" />
+            <PropertyRef Name="Cost" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ArticleProduct" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManyArticle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDApllication" Type="int" Nullable="false" />
+          <Property Name="ArticleProducct" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="NameMaterial" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProviderID" Type="int" />
+          <Property Name="UnitPackage" Type="int" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QuantityInStock" Type="int" Nullable="false" />
+          <Property Name="MinimalQuantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Material_Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ProductArticle" Type="int" Nullable="false" />
+          <Property Name="MaterialID" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "FloopMaster.dbo.MaterialHistory" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="MaterialHistory">
+          <Key>
+            <PropertyRef Name="IDMaterial" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="IDMaterial" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialProviderHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ProviderID" Type="int" Nullable="false" />
+          <Property Name="MaterialID" Type="int" Nullable="false" />
+          <Property Name="WorkerID" Type="int" Nullable="false" />
+          <Property Name="DeliveryDate" Type="date" Nullable="false" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="DateDelivery" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "FloopMaster.dbo.MinCostHistory" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="MinCostHistory">
+          <Key>
+            <PropertyRef Name="ArticleProduct" />
+            <PropertyRef Name="MinCost" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ArticleProduct" Type="int" Nullable="false" />
+          <Property Name="MinCost" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pathers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="NameCompany" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Legacy_Adress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="INN" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SurnameDirector" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NameDirector" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PatronomycDirector" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Logo" Type="nvarchar(max)" />
+          <Property Name="Rating" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Article" />
+          </Key>
+          <Property Name="Article" Type="int" Nullable="false" />
+          <Property Name="TypeProductID" Type="int" Nullable="false" />
+          <Property Name="NameProduct" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="MinCost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PackageLength" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PackageWidth" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PackageHeight" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="WeightNoPackage" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="WeightWithPackage" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="QualitySertificatePhoto" Type="nvarchar(max)" />
+          <Property Name="StandartNubmber" Type="int" />
+          <Property Name="ProductTimeCraft" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CostPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="WorkshopNumber" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "FloopMaster.dbo.ProductHistory" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ProductHistory">
+          <Key>
+            <PropertyRef Name="ArticleProduct" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="ArticleProduct" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="INN" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SalePlace">
+          <Key>
+            <PropertyRef Name="IDSsalePlace" />
+          </Key>
+          <Property Name="IDSsalePlace" Type="int" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Street" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HouseNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Index" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalePlacePathers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="IDSalePlace" Type="int" Nullable="false" />
+          <Property Name="IDPathers" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeMaterial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CentDefective" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypePathers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeProduct">
+          <Key>
+            <PropertyRef Name="IDTypeProduct" />
+          </Key>
+          <Property Name="IDTypeProduct" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TheCoefficient" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeProvider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar(max)" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="SeriesPassport" Type="int" Nullable="false" />
+          <Property Name="NumberPassport" Type="int" Nullable="false" />
+          <Property Name="NameBank" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AccountNumberBank" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BIСBAnk" Type="int" Nullable="false" />
+          <Property Name="CorporateAccountBank" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HavingFamily" Type="bit" Nullable="false" />
+          <Property Name="HealthStatus" Type="nvarchar(max)" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ApplicationProductParthers_Workers">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="1" />
+          <End Role="ApplicationProductParthers" Type="Self.ApplicationProductParthers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ApplicationProductParthers">
+              <PropertyRef Name="IDWorkers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CostPriceHistory_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="CostPriceHistory" Type="Self.CostPriceHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Article" />
+            </Principal>
+            <Dependent Role="CostPriceHistory">
+              <PropertyRef Name="ArticleProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManyArticle_ApplicationProductParthers">
+          <End Role="ApplicationProductParthers" Type="Self.ApplicationProductParthers" Multiplicity="1" />
+          <End Role="ManyArticle" Type="Self.ManyArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationProductParthers">
+              <PropertyRef Name="IDApplication" />
+            </Principal>
+            <Dependent Role="ManyArticle">
+              <PropertyRef Name="IDApllication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManyArticle_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ManyArticle" Type="Self.ManyArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Article" />
+            </Principal>
+            <Dependent Role="ManyArticle">
+              <PropertyRef Name="ArticleProducct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Material_Product_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="Material_Product" Type="Self.Material_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Material_Product">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Material_Product_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Material_Product" Type="Self.Material_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Article" />
+            </Principal>
+            <Dependent Role="Material_Product">
+              <PropertyRef Name="ProductArticle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Material_TypeMaterial">
+          <End Role="TypeMaterial" Type="Self.TypeMaterial" Multiplicity="1" />
+          <End Role="Material" Type="Self.Material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeMaterial">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Material">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialHistory_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="MaterialHistory" Type="Self.MaterialHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterialHistory">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialProviderHistory_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="MaterialProviderHistory" Type="Self.MaterialProviderHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterialProviderHistory">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialProviderHistory_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="MaterialProviderHistory" Type="Self.MaterialProviderHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterialProviderHistory">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialProviderHistory_Workers">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="1" />
+          <End Role="MaterialProviderHistory" Type="Self.MaterialProviderHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterialProviderHistory">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MinCostHistory_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="MinCostHistory" Type="Self.MinCostHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Article" />
+            </Principal>
+            <Dependent Role="MinCostHistory">
+              <PropertyRef Name="ArticleProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parthers_TypePathers">
+          <End Role="TypePathers" Type="Self.TypePathers" Multiplicity="1" />
+          <End Role="Pathers" Type="Self.Pathers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypePathers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pathers">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_TypeProduct1">
+          <End Role="TypeProduct" Type="Self.TypeProduct" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProduct">
+              <PropertyRef Name="IDTypeProduct" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="TypeProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductHistory_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductHistory" Type="Self.ProductHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Article" />
+            </Principal>
+            <Dependent Role="ProductHistory">
+              <PropertyRef Name="ArticleProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductParthers_Parthers">
+          <End Role="Pathers" Type="Self.Pathers" Multiplicity="1" />
+          <End Role="ApplicationProductParthers" Type="Self.ApplicationProductParthers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pathers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ApplicationProductParthers">
+              <PropertyRef Name="IDParthers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provider_TypeProvider">
+          <End Role="TypeProvider" Type="Self.TypeProvider" Multiplicity="1" />
+          <End Role="Provider" Type="Self.Provider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProvider">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Provider">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalePlacePathers_Pathers">
+          <End Role="Pathers" Type="Self.Pathers" Multiplicity="1" />
+          <End Role="SalePlacePathers" Type="Self.SalePlacePathers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pathers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SalePlacePathers">
+              <PropertyRef Name="IDPathers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalePlacePathers_SalePlace">
+          <End Role="SalePlace" Type="Self.SalePlace" Multiplicity="1" />
+          <End Role="SalePlacePathers" Type="Self.SalePlacePathers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalePlace">
+              <PropertyRef Name="IDSsalePlace" />
+            </Principal>
+            <Dependent Role="SalePlacePathers">
+              <PropertyRef Name="IDSalePlace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище FloopMasterModelContainer">
+          <EntitySet Name="ApplicationProductParthers" EntityType="Self.ApplicationProductParthers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManyArticle" EntityType="Self.ManyArticle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Material_Product" EntityType="Self.Material_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialProviderHistory" EntityType="Self.MaterialProviderHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pathers" EntityType="Self.Pathers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalePlace" EntityType="Self.SalePlace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalePlacePathers" EntityType="Self.SalePlacePathers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeMaterial" EntityType="Self.TypeMaterial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypePathers" EntityType="Self.TypePathers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeProduct" EntityType="Self.TypeProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeProvider" EntityType="Self.TypeProvider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CostPriceHistory" EntityType="Self.CostPriceHistory" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CostPriceHistory].[ArticleProduct] AS [ArticleProduct], 
+    [CostPriceHistory].[Cost] AS [Cost], 
+    [CostPriceHistory].[Date] AS [Date]
+    FROM [dbo].[CostPriceHistory] AS [CostPriceHistory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MaterialHistory" EntityType="Self.MaterialHistory" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MaterialHistory].[IDMaterial] AS [IDMaterial], 
+    [MaterialHistory].[Count] AS [Count], 
+    [MaterialHistory].[Date] AS [Date], 
+    [MaterialHistory].[Status] AS [Status]
+    FROM [dbo].[MaterialHistory] AS [MaterialHistory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MinCostHistory" EntityType="Self.MinCostHistory" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MinCostHistory].[ArticleProduct] AS [ArticleProduct], 
+    [MinCostHistory].[MinCost] AS [MinCost], 
+    [MinCostHistory].[Date] AS [Date]
+    FROM [dbo].[MinCostHistory] AS [MinCostHistory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProductHistory" EntityType="Self.ProductHistory" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProductHistory].[ArticleProduct] AS [ArticleProduct], 
+    [ProductHistory].[Date] AS [Date], 
+    [ProductHistory].[Count] AS [Count], 
+    [ProductHistory].[Status] AS [Status]
+    FROM [dbo].[ProductHistory] AS [ProductHistory]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ApplicationProductParthers_Workers" Association="Self.FK_ApplicationProductParthers_Workers">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="ApplicationProductParthers" EntitySet="ApplicationProductParthers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CostPriceHistory_Product" Association="Self.FK_CostPriceHistory_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CostPriceHistory" EntitySet="CostPriceHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManyArticle_ApplicationProductParthers" Association="Self.FK_ManyArticle_ApplicationProductParthers">
+            <End Role="ApplicationProductParthers" EntitySet="ApplicationProductParthers" />
+            <End Role="ManyArticle" EntitySet="ManyArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManyArticle_Product" Association="Self.FK_ManyArticle_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ManyArticle" EntitySet="ManyArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Material_Product_Material" Association="Self.FK_Material_Product_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="Material_Product" EntitySet="Material_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Material_Product_Product" Association="Self.FK_Material_Product_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Material_Product" EntitySet="Material_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Material_TypeMaterial" Association="Self.FK_Material_TypeMaterial">
+            <End Role="TypeMaterial" EntitySet="TypeMaterial" />
+            <End Role="Material" EntitySet="Material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialHistory_Material" Association="Self.FK_MaterialHistory_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="MaterialHistory" EntitySet="MaterialHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialProviderHistory_Material" Association="Self.FK_MaterialProviderHistory_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="MaterialProviderHistory" EntitySet="MaterialProviderHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialProviderHistory_Provider" Association="Self.FK_MaterialProviderHistory_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="MaterialProviderHistory" EntitySet="MaterialProviderHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialProviderHistory_Workers" Association="Self.FK_MaterialProviderHistory_Workers">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="MaterialProviderHistory" EntitySet="MaterialProviderHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MinCostHistory_Product" Association="Self.FK_MinCostHistory_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="MinCostHistory" EntitySet="MinCostHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parthers_TypePathers" Association="Self.FK_Parthers_TypePathers">
+            <End Role="TypePathers" EntitySet="TypePathers" />
+            <End Role="Pathers" EntitySet="Pathers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_TypeProduct1" Association="Self.FK_Product_TypeProduct1">
+            <End Role="TypeProduct" EntitySet="TypeProduct" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductHistory_Product" Association="Self.FK_ProductHistory_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductHistory" EntitySet="ProductHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductParthers_Parthers" Association="Self.FK_ProductParthers_Parthers">
+            <End Role="Pathers" EntitySet="Pathers" />
+            <End Role="ApplicationProductParthers" EntitySet="ApplicationProductParthers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider_TypeProvider" Association="Self.FK_Provider_TypeProvider">
+            <End Role="TypeProvider" EntitySet="TypeProvider" />
+            <End Role="Provider" EntitySet="Provider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalePlacePathers_Pathers" Association="Self.FK_SalePlacePathers_Pathers">
+            <End Role="Pathers" EntitySet="Pathers" />
+            <End Role="SalePlacePathers" EntitySet="SalePlacePathers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalePlacePathers_SalePlace" Association="Self.FK_SalePlacePathers_SalePlace">
+            <End Role="SalePlace" EntitySet="SalePlace" />
+            <End Role="SalePlacePathers" EntitySet="SalePlacePathers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Role" Association="Self.FK_Workers_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FloopMasterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ApplicationProductParthers">
+          <Key>
+            <PropertyRef Name="IDApplication" />
+          </Key>
+          <Property Name="IDApplication" Type="Int32" Nullable="false" />
+          <Property Name="IDParthers" Type="Int32" Nullable="false" />
+          <Property Name="IDWorkers" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK_ApplicationProductParthers_Workers" FromRole="ApplicationProductParthers" ToRole="Workers" />
+          <NavigationProperty Name="ManyArticle" Relationship="Self.FK_ManyArticle_ApplicationProductParthers" FromRole="ApplicationProductParthers" ToRole="ManyArticle" />
+          <NavigationProperty Name="Pathers" Relationship="Self.FK_ProductParthers_Parthers" FromRole="ApplicationProductParthers" ToRole="Pathers" />
+        </EntityType>
+        <EntityType Name="ManyArticle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDApllication" Type="Int32" Nullable="false" />
+          <Property Name="ArticleProducct" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ApplicationProductParthers" Relationship="Self.FK_ManyArticle_ApplicationProductParthers" FromRole="ManyArticle" ToRole="ApplicationProductParthers" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ManyArticle_Product" FromRole="ManyArticle" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="NameMaterial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderID" Type="Int32" />
+          <Property Name="UnitPackage" Type="Int32" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QuantityInStock" Type="Int32" Nullable="false" />
+          <Property Name="MinimalQuantity" Type="Int32" />
+          <NavigationProperty Name="Material_Product" Relationship="Self.FK_Material_Product_Material" FromRole="Material" ToRole="Material_Product" />
+          <NavigationProperty Name="TypeMaterial" Relationship="Self.FK_Material_TypeMaterial" FromRole="Material" ToRole="TypeMaterial" />
+          <NavigationProperty Name="MaterialHistory" Relationship="Self.FK_MaterialHistory_Material" FromRole="Material" ToRole="MaterialHistory" />
+          <NavigationProperty Name="MaterialProviderHistory" Relationship="Self.FK_MaterialProviderHistory_Material" FromRole="Material" ToRole="MaterialProviderHistory" />
+        </EntityType>
+        <EntityType Name="Material_Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ProductArticle" Type="Int32" Nullable="false" />
+          <Property Name="MaterialID" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_Material_Product_Material" FromRole="Material_Product" ToRole="Material" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Material_Product_Product" FromRole="Material_Product" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="MaterialProviderHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ProviderID" Type="Int32" Nullable="false" />
+          <Property Name="MaterialID" Type="Int32" Nullable="false" />
+          <Property Name="WorkerID" Type="Int32" Nullable="false" />
+          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="DateDelivery" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_MaterialProviderHistory_Material" FromRole="MaterialProviderHistory" ToRole="Material" />
+          <NavigationProperty Name="Provider" Relationship="Self.FK_MaterialProviderHistory_Provider" FromRole="MaterialProviderHistory" ToRole="Provider" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK_MaterialProviderHistory_Workers" FromRole="MaterialProviderHistory" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="Pathers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="NameCompany" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Legacy_Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="INN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SurnameDirector" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameDirector" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatronomycDirector" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ApplicationProductParthers" Relationship="Self.FK_ProductParthers_Parthers" FromRole="Pathers" ToRole="ApplicationProductParthers" />
+          <NavigationProperty Name="TypePathers" Relationship="Self.FK_Parthers_TypePathers" FromRole="Pathers" ToRole="TypePathers" />
+          <NavigationProperty Name="SalePlacePathers" Relationship="Self.FK_SalePlacePathers_Pathers" FromRole="Pathers" ToRole="SalePlacePathers" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Article" />
+          </Key>
+          <Property Name="Article" Type="Int32" Nullable="false" />
+          <Property Name="TypeProductID" Type="Int32" Nullable="false" />
+          <Property Name="NameProduct" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MinCost" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PackageLength" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PackageWidth" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PackageHeight" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WeightNoPackage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WeightWithPackage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="QualitySertificatePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StandartNubmber" Type="Int32" />
+          <Property Name="ProductTimeCraft" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CostPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WorkshopNumber" Type="Int32" />
+          <NavigationProperty Name="ManyArticle" Relationship="Self.FK_ManyArticle_Product" FromRole="Product" ToRole="ManyArticle" />
+          <NavigationProperty Name="Material_Product" Relationship="Self.FK_Material_Product_Product" FromRole="Product" ToRole="Material_Product" />
+          <NavigationProperty Name="CostPriceHistory" Relationship="Self.FK_CostPriceHistory_Product" FromRole="Product" ToRole="CostPriceHistory" />
+          <NavigationProperty Name="MinCostHistory" Relationship="Self.FK_MinCostHistory_Product" FromRole="Product" ToRole="MinCostHistory" />
+          <NavigationProperty Name="TypeProduct" Relationship="Self.FK_Product_TypeProduct1" FromRole="Product" ToRole="TypeProduct" />
+          <NavigationProperty Name="ProductHistory" Relationship="Self.FK_ProductHistory_Product" FromRole="Product" ToRole="ProductHistory" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="INN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MaterialProviderHistory" Relationship="Self.FK_MaterialProviderHistory_Provider" FromRole="Provider" ToRole="MaterialProviderHistory" />
+          <NavigationProperty Name="TypeProvider" Relationship="Self.FK_Provider_TypeProvider" FromRole="Provider" ToRole="TypeProvider" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK_Workers_Role" FromRole="Role" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="SalePlace">
+          <Key>
+            <PropertyRef Name="IDSsalePlace" />
+          </Key>
+          <Property Name="IDSsalePlace" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HouseNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Index" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SalePlacePathers" Relationship="Self.FK_SalePlacePathers_SalePlace" FromRole="SalePlace" ToRole="SalePlacePathers" />
+        </EntityType>
+        <EntityType Name="SalePlacePathers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="IDSalePlace" Type="Int32" Nullable="false" />
+          <Property Name="IDPathers" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pathers" Relationship="Self.FK_SalePlacePathers_Pathers" FromRole="SalePlacePathers" ToRole="Pathers" />
+          <NavigationProperty Name="SalePlace" Relationship="Self.FK_SalePlacePathers_SalePlace" FromRole="SalePlacePathers" ToRole="SalePlace" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeMaterial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CentDefective" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_Material_TypeMaterial" FromRole="TypeMaterial" ToRole="Material" />
+        </EntityType>
+        <EntityType Name="TypePathers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Pathers" Relationship="Self.FK_Parthers_TypePathers" FromRole="TypePathers" ToRole="Pathers" />
+        </EntityType>
+        <EntityType Name="TypeProduct">
+          <Key>
+            <PropertyRef Name="IDTypeProduct" />
+          </Key>
+          <Property Name="IDTypeProduct" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TheCoefficient" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_TypeProduct1" FromRole="TypeProduct" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="TypeProvider">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Provider" Relationship="Self.FK_Provider_TypeProvider" FromRole="TypeProvider" ToRole="Provider" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SeriesPassport" Type="Int32" Nullable="false" />
+          <Property Name="NumberPassport" Type="Int32" Nullable="false" />
+          <Property Name="NameBank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccountNumberBank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BIСBAnk" Type="Int32" Nullable="false" />
+          <Property Name="CorporateAccountBank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HavingFamily" Type="Boolean" Nullable="false" />
+          <Property Name="HealthStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ApplicationProductParthers" Relationship="Self.FK_ApplicationProductParthers_Workers" FromRole="Workers" ToRole="ApplicationProductParthers" />
+          <NavigationProperty Name="MaterialProviderHistory" Relationship="Self.FK_MaterialProviderHistory_Workers" FromRole="Workers" ToRole="MaterialProviderHistory" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Workers_Role" FromRole="Workers" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="CostPriceHistory">
+          <Key>
+            <PropertyRef Name="ArticleProduct" />
+            <PropertyRef Name="Cost" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ArticleProduct" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_CostPriceHistory_Product" FromRole="CostPriceHistory" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="MaterialHistory">
+          <Key>
+            <PropertyRef Name="IDMaterial" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="IDMaterial" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_MaterialHistory_Material" FromRole="MaterialHistory" ToRole="Material" />
+        </EntityType>
+        <EntityType Name="MinCostHistory">
+          <Key>
+            <PropertyRef Name="ArticleProduct" />
+            <PropertyRef Name="MinCost" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ArticleProduct" Type="Int32" Nullable="false" />
+          <Property Name="MinCost" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_MinCostHistory_Product" FromRole="MinCostHistory" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ProductHistory">
+          <Key>
+            <PropertyRef Name="ArticleProduct" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Count" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="ArticleProduct" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductHistory_Product" FromRole="ProductHistory" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_ApplicationProductParthers_Workers">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="1" />
+          <End Role="ApplicationProductParthers" Type="Self.ApplicationProductParthers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ApplicationProductParthers">
+              <PropertyRef Name="IDWorkers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManyArticle_ApplicationProductParthers">
+          <End Role="ApplicationProductParthers" Type="Self.ApplicationProductParthers" Multiplicity="1" />
+          <End Role="ManyArticle" Type="Self.ManyArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationProductParthers">
+              <PropertyRef Name="IDApplication" />
+            </Principal>
+            <Dependent Role="ManyArticle">
+              <PropertyRef Name="IDApllication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductParthers_Parthers">
+          <End Role="Pathers" Type="Self.Pathers" Multiplicity="1" />
+          <End Role="ApplicationProductParthers" Type="Self.ApplicationProductParthers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pathers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ApplicationProductParthers">
+              <PropertyRef Name="IDParthers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManyArticle_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ManyArticle" Type="Self.ManyArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Article" />
+            </Principal>
+            <Dependent Role="ManyArticle">
+              <PropertyRef Name="ArticleProducct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Material_Product_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="Material_Product" Type="Self.Material_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Material_Product">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Material_TypeMaterial">
+          <End Role="TypeMaterial" Type="Self.TypeMaterial" Multiplicity="1" />
+          <End Role="Material" Type="Self.Material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeMaterial">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Material">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialHistory_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="MaterialHistory" Type="Self.MaterialHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterialHistory">
+              <PropertyRef Name="IDMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialProviderHistory_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1" />
+          <End Role="MaterialProviderHistory" Type="Self.MaterialProviderHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterialProviderHistory">
+              <PropertyRef Name="MaterialID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Material_Product_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Material_Product" Type="Self.Material_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Article" />
+            </Principal>
+            <Dependent Role="Material_Product">
+              <PropertyRef Name="ProductArticle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialProviderHistory_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="MaterialProviderHistory" Type="Self.MaterialProviderHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterialProviderHistory">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialProviderHistory_Workers">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="1" />
+          <End Role="MaterialProviderHistory" Type="Self.MaterialProviderHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MaterialProviderHistory">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parthers_TypePathers">
+          <End Role="TypePathers" Type="Self.TypePathers" Multiplicity="1" />
+          <End Role="Pathers" Type="Self.Pathers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypePathers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pathers">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalePlacePathers_Pathers">
+          <End Role="Pathers" Type="Self.Pathers" Multiplicity="1" />
+          <End Role="SalePlacePathers" Type="Self.SalePlacePathers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pathers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SalePlacePathers">
+              <PropertyRef Name="IDPathers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CostPriceHistory_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="CostPriceHistory" Type="Self.CostPriceHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Article" />
+            </Principal>
+            <Dependent Role="CostPriceHistory">
+              <PropertyRef Name="ArticleProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MinCostHistory_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="MinCostHistory" Type="Self.MinCostHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Article" />
+            </Principal>
+            <Dependent Role="MinCostHistory">
+              <PropertyRef Name="ArticleProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_TypeProduct1">
+          <End Role="TypeProduct" Type="Self.TypeProduct" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProduct">
+              <PropertyRef Name="IDTypeProduct" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="TypeProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductHistory_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductHistory" Type="Self.ProductHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Article" />
+            </Principal>
+            <Dependent Role="ProductHistory">
+              <PropertyRef Name="ArticleProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provider_TypeProvider">
+          <End Role="TypeProvider" Type="Self.TypeProvider" Multiplicity="1" />
+          <End Role="Provider" Type="Self.Provider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProvider">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Provider">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalePlacePathers_SalePlace">
+          <End Role="SalePlace" Type="Self.SalePlace" Multiplicity="1" />
+          <End Role="SalePlacePathers" Type="Self.SalePlacePathers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalePlace">
+              <PropertyRef Name="IDSsalePlace" />
+            </Principal>
+            <Dependent Role="SalePlacePathers">
+              <PropertyRef Name="IDSalePlace" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FloopMasterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ApplicationProductParthers" EntityType="Self.ApplicationProductParthers" />
+          <EntitySet Name="ManyArticle" EntityType="Self.ManyArticle" />
+          <EntitySet Name="Material" EntityType="Self.Material" />
+          <EntitySet Name="Material_Product" EntityType="Self.Material_Product" />
+          <EntitySet Name="MaterialProviderHistory" EntityType="Self.MaterialProviderHistory" />
+          <EntitySet Name="Pathers" EntityType="Self.Pathers" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="SalePlace" EntityType="Self.SalePlace" />
+          <EntitySet Name="SalePlacePathers" EntityType="Self.SalePlacePathers" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypeMaterial" EntityType="Self.TypeMaterial" />
+          <EntitySet Name="TypePathers" EntityType="Self.TypePathers" />
+          <EntitySet Name="TypeProduct" EntityType="Self.TypeProduct" />
+          <EntitySet Name="TypeProvider" EntityType="Self.TypeProvider" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" />
+          <EntitySet Name="CostPriceHistory" EntityType="Self.CostPriceHistory" />
+          <EntitySet Name="MaterialHistory" EntityType="Self.MaterialHistory" />
+          <EntitySet Name="MinCostHistory" EntityType="Self.MinCostHistory" />
+          <EntitySet Name="ProductHistory" EntityType="Self.ProductHistory" />
+          <AssociationSet Name="FK_ApplicationProductParthers_Workers" Association="Self.FK_ApplicationProductParthers_Workers">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="ApplicationProductParthers" EntitySet="ApplicationProductParthers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManyArticle_ApplicationProductParthers" Association="Self.FK_ManyArticle_ApplicationProductParthers">
+            <End Role="ApplicationProductParthers" EntitySet="ApplicationProductParthers" />
+            <End Role="ManyArticle" EntitySet="ManyArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductParthers_Parthers" Association="Self.FK_ProductParthers_Parthers">
+            <End Role="Pathers" EntitySet="Pathers" />
+            <End Role="ApplicationProductParthers" EntitySet="ApplicationProductParthers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManyArticle_Product" Association="Self.FK_ManyArticle_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ManyArticle" EntitySet="ManyArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Material_Product_Material" Association="Self.FK_Material_Product_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="Material_Product" EntitySet="Material_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Material_TypeMaterial" Association="Self.FK_Material_TypeMaterial">
+            <End Role="TypeMaterial" EntitySet="TypeMaterial" />
+            <End Role="Material" EntitySet="Material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialHistory_Material" Association="Self.FK_MaterialHistory_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="MaterialHistory" EntitySet="MaterialHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialProviderHistory_Material" Association="Self.FK_MaterialProviderHistory_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="MaterialProviderHistory" EntitySet="MaterialProviderHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Material_Product_Product" Association="Self.FK_Material_Product_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Material_Product" EntitySet="Material_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialProviderHistory_Provider" Association="Self.FK_MaterialProviderHistory_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="MaterialProviderHistory" EntitySet="MaterialProviderHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialProviderHistory_Workers" Association="Self.FK_MaterialProviderHistory_Workers">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="MaterialProviderHistory" EntitySet="MaterialProviderHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parthers_TypePathers" Association="Self.FK_Parthers_TypePathers">
+            <End Role="TypePathers" EntitySet="TypePathers" />
+            <End Role="Pathers" EntitySet="Pathers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalePlacePathers_Pathers" Association="Self.FK_SalePlacePathers_Pathers">
+            <End Role="Pathers" EntitySet="Pathers" />
+            <End Role="SalePlacePathers" EntitySet="SalePlacePathers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CostPriceHistory_Product" Association="Self.FK_CostPriceHistory_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CostPriceHistory" EntitySet="CostPriceHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MinCostHistory_Product" Association="Self.FK_MinCostHistory_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="MinCostHistory" EntitySet="MinCostHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_TypeProduct1" Association="Self.FK_Product_TypeProduct1">
+            <End Role="TypeProduct" EntitySet="TypeProduct" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductHistory_Product" Association="Self.FK_ProductHistory_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductHistory" EntitySet="ProductHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider_TypeProvider" Association="Self.FK_Provider_TypeProvider">
+            <End Role="TypeProvider" EntitySet="TypeProvider" />
+            <End Role="Provider" EntitySet="Provider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Role" Association="Self.FK_Workers_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalePlacePathers_SalePlace" Association="Self.FK_SalePlacePathers_SalePlace">
+            <End Role="SalePlace" EntitySet="SalePlace" />
+            <End Role="SalePlacePathers" EntitySet="SalePlacePathers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище FloopMasterModelContainer" CdmEntityContainer="FloopMasterEntities">
+          <EntitySetMapping Name="ApplicationProductParthers">
+            <EntityTypeMapping TypeName="FloopMasterModel.ApplicationProductParthers">
+              <MappingFragment StoreEntitySet="ApplicationProductParthers">
+                <ScalarProperty Name="IDApplication" ColumnName="IDApplication" />
+                <ScalarProperty Name="IDParthers" ColumnName="IDParthers" />
+                <ScalarProperty Name="IDWorkers" ColumnName="IDWorkers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManyArticle">
+            <EntityTypeMapping TypeName="FloopMasterModel.ManyArticle">
+              <MappingFragment StoreEntitySet="ManyArticle">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDApllication" ColumnName="IDApllication" />
+                <ScalarProperty Name="ArticleProducct" ColumnName="ArticleProducct" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Material">
+            <EntityTypeMapping TypeName="FloopMasterModel.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="NameMaterial" ColumnName="NameMaterial" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="UnitPackage" ColumnName="UnitPackage" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="QuantityInStock" ColumnName="QuantityInStock" />
+                <ScalarProperty Name="MinimalQuantity" ColumnName="MinimalQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Material_Product">
+            <EntityTypeMapping TypeName="FloopMasterModel.Material_Product">
+              <MappingFragment StoreEntitySet="Material_Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductArticle" ColumnName="ProductArticle" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialProviderHistory">
+            <EntityTypeMapping TypeName="FloopMasterModel.MaterialProviderHistory">
+              <MappingFragment StoreEntitySet="MaterialProviderHistory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="DateDelivery" ColumnName="DateDelivery" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pathers">
+            <EntityTypeMapping TypeName="FloopMasterModel.Pathers">
+              <MappingFragment StoreEntitySet="Pathers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="NameCompany" ColumnName="NameCompany" />
+                <ScalarProperty Name="Legacy_Adress" ColumnName="Legacy_Adress" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="SurnameDirector" ColumnName="SurnameDirector" />
+                <ScalarProperty Name="NameDirector" ColumnName="NameDirector" />
+                <ScalarProperty Name="PatronomycDirector" ColumnName="PatronomycDirector" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="FloopMasterModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Article" ColumnName="Article" />
+                <ScalarProperty Name="TypeProductID" ColumnName="TypeProductID" />
+                <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="MinCost" ColumnName="MinCost" />
+                <ScalarProperty Name="PackageLength" ColumnName="PackageLength" />
+                <ScalarProperty Name="PackageWidth" ColumnName="PackageWidth" />
+                <ScalarProperty Name="PackageHeight" ColumnName="PackageHeight" />
+                <ScalarProperty Name="WeightNoPackage" ColumnName="WeightNoPackage" />
+                <ScalarProperty Name="WeightWithPackage" ColumnName="WeightWithPackage" />
+                <ScalarProperty Name="QualitySertificatePhoto" ColumnName="QualitySertificatePhoto" />
+                <ScalarProperty Name="StandartNubmber" ColumnName="StandartNubmber" />
+                <ScalarProperty Name="ProductTimeCraft" ColumnName="ProductTimeCraft" />
+                <ScalarProperty Name="CostPrice" ColumnName="CostPrice" />
+                <ScalarProperty Name="WorkshopNumber" ColumnName="WorkshopNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provider">
+            <EntityTypeMapping TypeName="FloopMasterModel.Provider">
+              <MappingFragment StoreEntitySet="Provider">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="FloopMasterModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalePlace">
+            <EntityTypeMapping TypeName="FloopMasterModel.SalePlace">
+              <MappingFragment StoreEntitySet="SalePlace">
+                <ScalarProperty Name="IDSsalePlace" ColumnName="IDSsalePlace" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalePlacePathers">
+            <EntityTypeMapping TypeName="FloopMasterModel.SalePlacePathers">
+              <MappingFragment StoreEntitySet="SalePlacePathers">
+                <ScalarProperty Name="IDSalePlace" ColumnName="IDSalePlace" />
+                <ScalarProperty Name="IDPathers" ColumnName="IDPathers" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FloopMasterModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeMaterial">
+            <EntityTypeMapping TypeName="FloopMasterModel.TypeMaterial">
+              <MappingFragment StoreEntitySet="TypeMaterial">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NameType" ColumnName="NameType" />
+                <ScalarProperty Name="CentDefective" ColumnName="CentDefective" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypePathers">
+            <EntityTypeMapping TypeName="FloopMasterModel.TypePathers">
+              <MappingFragment StoreEntitySet="TypePathers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeProduct">
+            <EntityTypeMapping TypeName="FloopMasterModel.TypeProduct">
+              <MappingFragment StoreEntitySet="TypeProduct">
+                <ScalarProperty Name="IDTypeProduct" ColumnName="IDTypeProduct" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TheCoefficient" ColumnName="TheCoefficient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeProvider">
+            <EntityTypeMapping TypeName="FloopMasterModel.TypeProvider">
+              <MappingFragment StoreEntitySet="TypeProvider">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workers">
+            <EntityTypeMapping TypeName="FloopMasterModel.Workers">
+              <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="SeriesPassport" ColumnName="SeriesPassport" />
+                <ScalarProperty Name="NumberPassport" ColumnName="NumberPassport" />
+                <ScalarProperty Name="NameBank" ColumnName="NameBank" />
+                <ScalarProperty Name="AccountNumberBank" ColumnName="AccountNumberBank" />
+                <ScalarProperty Name="BIСBAnk" ColumnName="BIСBAnk" />
+                <ScalarProperty Name="CorporateAccountBank" ColumnName="CorporateAccountBank" />
+                <ScalarProperty Name="HavingFamily" ColumnName="HavingFamily" />
+                <ScalarProperty Name="HealthStatus" ColumnName="HealthStatus" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CostPriceHistory">
+            <EntityTypeMapping TypeName="FloopMasterModel.CostPriceHistory">
+              <MappingFragment StoreEntitySet="CostPriceHistory">
+                <ScalarProperty Name="ArticleProduct" ColumnName="ArticleProduct" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialHistory">
+            <EntityTypeMapping TypeName="FloopMasterModel.MaterialHistory">
+              <MappingFragment StoreEntitySet="MaterialHistory">
+                <ScalarProperty Name="IDMaterial" ColumnName="IDMaterial" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MinCostHistory">
+            <EntityTypeMapping TypeName="FloopMasterModel.MinCostHistory">
+              <MappingFragment StoreEntitySet="MinCostHistory">
+                <ScalarProperty Name="ArticleProduct" ColumnName="ArticleProduct" />
+                <ScalarProperty Name="MinCost" ColumnName="MinCost" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductHistory">
+            <EntityTypeMapping TypeName="FloopMasterModel.ProductHistory">
+              <MappingFragment StoreEntitySet="ProductHistory">
+                <ScalarProperty Name="ArticleProduct" ColumnName="ArticleProduct" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
